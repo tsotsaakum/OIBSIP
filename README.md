@@ -1,2 +1,2 @@
-# OIBSIP
-Internship python programmer task work 
+https://github.com/...
+
