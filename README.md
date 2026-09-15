@@ -2,8 +2,7 @@
 
 Oasis Infobyte Internship Program — three Python tasks in **one** GitHub repo.
 
-**Team:** you (owner) · **Lentswe** (collaborator)
-
+**Team:** you (owner) 
 Clone **once**, then go into the folder for the task you want:
 
 ```bash
