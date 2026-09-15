@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-phase="day">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lentswe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="wordmark" href="./">Lentswe</a>
+      <p class="meaning">the word on the weather</p>
+      <form id="searchForm">
+        <label class="sr" for="q">Location</label>
+        <input id="q" type="search" placeholder="City or ZIP" autocomplete="off" />
+        <button type="submit">Look up</button>
+        <button type="button" id="unitBtn">°C</button>
+        <button type="button" id="voiceSearch" title="Speak a city">Voice</button>
+        <button type="button" id="speakWeather" title="Hear the forecast">Listen</button>
+      </form>
+    </header>
+
+    <p id="status" hidden></p>
+    <p id="error" hidden></p>
+
+    <div class="board">
+      <section class="story">
+        <p id="place" class="place">Choose a place</p>
+        <p id="temp" class="temp">--°</p>
+        <p id="cond" class="cond">Lentswe will describe the sky once you search.</p>
+        <p id="meta" class="meta"></p>
+        <img id="heroIcon" alt="" hidden />
+        <p id="said" class="said"></p>
+      </section>
+
+      <aside class="facts">
+        <h2>Now</h2>
+        <dl>
+          <div><dt>Feels like</dt><dd id="tFeel">—</dd></div>
+          <div><dt>Humidity</dt><dd id="tHum">—</dd></div>
+          <div><dt>Wind</dt><dd id="tWind">—</dd></div>
+          <div><dt>Pressure</dt><dd id="tPres">—</dd></div>
+          <div><dt>UV</dt><dd id="tUv">—</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <section class="horizon" aria-label="Sunrise and sunset">
+      <article class="rise">
+        <p class="sky-kicker">Morning light</p>
+        <h2>Sunrise</h2>
+        <p id="tRise" class="when">—</p>
+      </article>
+      <article class="set">
+        <p class="sky-kicker">Evening light</p>
+        <h2>Sunset</h2>
+        <p id="tSet" class="when">—</p>
+      </article>
+    </section>
+
+    <section class="strip">
+      <h2>Next six hours</h2>
+      <div id="hours" class="hours"></div>
+    </section>
+
+    <section class="outlook">
+      <h2>Five-day outlook</h2>
+      <div id="days"></div>
+    </section>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

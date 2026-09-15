@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lentswe · Voice in 11 languages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <div class="wordmark">
+        <svg class="crest" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="#4a6b5c" />
+          <path fill="#f3f0ea" d="M24 8c2.2 6.5 6 10.2 11 12-5 1.6-8.8 5.4-11 12-2.2-6.6-6-10.4-11-12 5-1.8 8.8-5.5 11-12z"/>
+          <circle cx="24" cy="24" r="4" fill="#c48b8a" />
+        </svg>
+        <div>
+          <p class="kicker">South African voice</p>
+          <h1>Lentswe</h1>
+          <p id="groq-line" class="hint">Groq chat: checking…</p>
+        </div>
+      </div>
+      <label class="lang-wrap">
+        <span>Language</span>
+        <select id="language">
+          <option value="auto">Auto-detect</option>
+        </select>
+      </label>
+    </header>
+
+    <p id="spoken-hint" class="hint">Choose a language, then speak or type. Greetings are public words; Lentswe speaks them in her own synthetic voice.</p>
+
+    <section class="greet-band" aria-label="Native greetings">
+      <div class="greet-head">
+        <h2>Greet her first</h2>
+        <button id="play-all" type="button">Lentswe says all 11</button>
+      </div>
+      <div id="greet-chips" class="chips"></div>
+    </section>
+
+    <nav class="skill-row" aria-label="Skills">
+      <button type="button" data-skill="travel">Travel</button>
+      <button type="button" data-skill="home">Home</button>
+      <button type="button" data-skill="music">Music</button>
+      <button type="button" data-skill="safety">Safety</button>
+      <button type="button" data-skill="health">Health</button>
+      <button type="button" data-skill="tasks">Tasks</button>
+      <button type="button" data-skill="goals">Goals</button>
+      <button type="button" data-skill="learn">Learning</button>
+      <button type="button" data-skill="access">Access</button>
+    </nav>
+
+    <section id="skill-panel" class="skill-panel" hidden>
+      <div class="skill-view" data-view="travel">
+        <h3>Travel</h3>
+        <p>Forecasts and practical SA tips. I do not book tickets. Use the chips to test memory plus live weather — then “Should I run today?”</p>
+        <div class="chips">
+          <button type="button" class="ask" data-ask="add to my list pack for Durban">Pack for Durban</button>
+          <button type="button" class="ask" data-ask="weather in Durban">Durban weather</button>
+          <button type="button" class="ask" data-ask="should I pack a jacket given my list?">Jacket for my list?</button>
+          <button type="button" class="ask" data-ask="weather in Cape Town">Cape Town weather</button>
+          <button type="button" class="ask" data-ask="weather in Johannesburg">Johannesburg weather</button>
+          <button type="button" class="ask" data-ask="should I go for a run today?">Should I run today?</button>
+          <button type="button" class="ask" data-ask="what do you remember about me?">What do you remember?</button>
+        </div>
+      </div>
+      <div class="skill-view" data-view="home">
+        <h3>Home</h3>
+        <p>Your address stays in this browser. GPS is used only when you tap Guide me home.</p>
+        <form id="home-form" class="mini-form">
+          <input id="home-input" type="text" placeholder="Home address" autocomplete="street-address" />
+          <button type="submit">Save home</button>
+        </form>
+        <p id="home-saved" class="hint"></p>
+        <div class="chips">
+          <button type="button" id="home-show-map">Show map pin</button>
+          <button type="button" id="home-guide">Guide me home</button>
+        </div>
+        <iframe id="home-map" class="map-frame" title="OpenStreetMap of home" hidden></iframe>
+      </div>
+      <div class="skill-view" data-view="music">
+        <h3>Music</h3>
+        <p>Licensed players only: paste a Spotify playlist, album, or track link to embed it, or search YouTube Music. I do not clone voices or play ripped files.</p>
+        <form id="spotify-form" class="mini-form">
+          <input id="spotify-input" type="url" placeholder="Spotify playlist, album, or track URL" autocomplete="off" />
+          <button type="submit">Save embed</button>
+        </form>
+        <p id="spotify-saved" class="hint"></p>
+        <iframe id="spotify-frame" class="music-frame" title="Spotify player" hidden allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <form id="ytm-form" class="mini-form">
+          <input id="ytm-input" type="search" placeholder="Search YouTube Music…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <div class="chips">
+          <button type="button" id="music-open-spotify">Open Spotify</button>
+          <button type="button" id="music-open-ytm">Open YouTube Music</button>
+        </div>
+      </div>
+      <div class="skill-view" data-view="safety">
+        <h3>Safety</h3>
+        <p>Call a human if you are in danger. I cannot send police.</p>
+        <ul class="num-list">
+          <li>112 emergency (cellphone)</li>
+          <li>10111 police (SAPS)</li>
+          <li>10177 ambulance</li>
+        </ul>
+        <button type="button" class="ask" data-ask="call for help">Call for help</button>
+        <button type="button" class="ask" data-ask="emergency numbers">Hear the numbers</button>
+      </div>
+      <div class="skill-view" data-view="health">
+        <h3>Health and wellbeing</h3>
+        <p>I am not a doctor. SADAG 0800 567 567. Emergency 112. Symptom log is a diary only.</p>
+        <div class="chips">
+          <button type="button" class="ask" data-ask="wellbeing help">Hear helplines</button>
+          <button type="button" class="ask" data-ask="log that I have a headache">Log a headache</button>
+          <button type="button" class="ask" data-ask="show my symptoms">Show my symptoms</button>
+          <button type="button" class="ask" data-ask="my goal is run three times this week">Goal: run this week</button>
+          <button type="button" class="ask" data-ask="log that my knee is sore">Log a sore knee</button>
+          <button type="button" class="ask" data-ask="should I go for a run today?">Should I run today?</button>
+        </div>
+      </div>
+      <div class="skill-view" data-view="tasks">
+        <h3>To-do</h3>
+        <form id="task-form" class="mini-form">
+          <input id="task-input" type="text" placeholder="Add a task…" autocomplete="off" />
+          <button type="submit">Add</button>
+        </form>
+        <ul id="task-list" class="check-list"></ul>
+      </div>
+      <div class="skill-view" data-view="goals">
+        <h3>Goals</h3>
+        <p>What you are working toward this week — saved in Lentswe’s JSON memory on this computer, not only this chat.</p>
+        <form id="goal-form" class="mini-form">
+          <input id="goal-input" type="text" placeholder="e.g. Ship the weather app…" autocomplete="off" />
+          <button type="submit">Save goal</button>
+        </form>
+        <ul id="goal-list" class="check-list"></ul>
+      </div>
+      <div class="skill-view" data-view="learn">
+        <h3>Learning</h3>
+        <p>Drill official-language greetings. Lentswe speaks with TTS, not YouTube audio.</p>
+        <div class="chips">
+          <button type="button" class="ask" data-ask="teach me isiZulu">Teach isiZulu</button>
+          <button type="button" class="ask" data-ask="teach me isiXhosa">Teach isiXhosa</button>
+          <button type="button" class="ask" data-ask="teach me Sepedi">Teach Sepedi</button>
+        </div>
+      </div>
+      <div class="skill-view" data-view="access">
+        <h3>Accessibility</h3>
+        <label class="toggle"><input id="a11y-large" type="checkbox" /> Larger text</label>
+        <label class="toggle"><input id="a11y-contrast" type="checkbox" /> Higher contrast</label>
+        <label class="toggle"><input id="a11y-motion" type="checkbox" /> Reduce motion</label>
+      </div>
+    </section>
+
+    <section id="log" class="thread" aria-live="polite">
+      <div id="empty-state" class="empty">
+        <p class="empty-title">She is listening in eleven languages.</p>
+        <p>Tap a greeting, ask for weather, or type in the box below.</p>
+      </div>
+    </section>
+
+    <form id="type-form" class="dock">
+      <button id="mic" type="button" class="mic" aria-pressed="false" title="Click to talk">
+        <span class="mic-halo" aria-hidden="true"></span>
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Zm5-3a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20H7a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2h-2v-2.08A7 7 0 0 0 17 11Z"/>
+        </svg>
+        <span class="sr-only">Click to talk</span>
+      </button>
+      <input id="text-input" type="text" placeholder="Type to Lentswe…" autocomplete="off" />
+      <button type="submit" class="send">Send</button>
+      <button id="stop-speech" type="button" class="quiet" hidden>Hush</button>
+    </form>
+    <p id="status" class="status">Ready. Click the disc, speak, click again to send.</p>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+# Sample Kubernetes manifests for a single replica.
+# This is a portfolio example, not a production cluster you already run.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lentswe
+  labels:
+    app: lentswe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lentswe
+  template:
+    metadata:
+      labels:
+        app: lentswe
+    spec:
+      containers:
+        - name: lentswe
+          image: lentswe:local
+          ports:
+            - containerPort: 7000
+          env:
+            - name: LENTSWE_DATA_DIR
+              value: /app/data
+            - name: PORT
+              value: "7000"
+            - name: LOG_LEVEL
+              value: INFO
+          readinessProbe:
+            httpGet:
+              path: /api/ready
+              port: 7000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 7000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lentswe
+spec:
+  selector:
+    app: lentswe
+  ports:
+    - port: 80
+      targetPort: 7000
+  type: ClusterIP

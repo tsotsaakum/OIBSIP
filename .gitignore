@@ -1,0 +1,10 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.cursor/
+*.wav
+*.mp3
+data/lentswe.json

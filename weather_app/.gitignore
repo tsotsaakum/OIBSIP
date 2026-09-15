@@ -1,0 +1,7 @@
+.env
+.venv/
+SkyCast_Tutorial.pdf
+venv/
+__pycache__/
+*.pyc
+.cursor/

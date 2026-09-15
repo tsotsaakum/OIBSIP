@@ -1,0 +1,14 @@
+venv/
+.venv/
+.env
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+*.wav
+*.mp3
+data/lentswe.json
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/

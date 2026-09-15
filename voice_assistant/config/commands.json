@@ -1,0 +1,14 @@
+{
+  "open youtube": {
+    "action": "open_url",
+    "url": "https://www.youtube.com"
+  },
+  "open wikipedia": {
+    "action": "open_url",
+    "url": "https://en.wikipedia.org"
+  },
+  "turn on the lights": {
+    "action": "say",
+    "text": "I have no smart-home hardware. I will not pretend I switched a light on."
+  }
+}
